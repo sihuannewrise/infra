@@ -1,5 +1,6 @@
 # path to place the file
 # scp -P 2222 config/traefik.yml sihuan@knhcloud:/volume4/dockume/traefik/config
+# scp -P 2222 config/traefik.yml sihuan@192.168.2.72:/volume4/dockume/traefik/config
 
 # log:
 #   level: DEBUG
@@ -18,7 +19,7 @@ providers:
 
 entryPoints:
   web:
-    address: knhcloud:80
+    address: :80
     # http:
     #   redirections:
     #     entryPoint:

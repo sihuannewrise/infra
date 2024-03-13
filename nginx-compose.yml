@@ -1,4 +1,5 @@
-# curl -H Host:traefik.vgate.keenetic.pro http://127.0.0.1
+# curl -H Host:web.vgate.keenetic.pro http://127.0.0.1
+# curl -H Host:whoami.xwick.ru http://127.0.0.1
 
 version: '3'
 
@@ -19,7 +20,7 @@ services:
 
   whoami:
     image: traefik/whoami
-    scale: 3
+    # scale: 3
     labels:
       - traefik.enable=true
       - traefik.http.routers.whoami.rule=Host(`whoami.xwick.ru`)
