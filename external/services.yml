@@ -1,0 +1,19 @@
+# path to place the file
+# scp -P 2222 external/services.yml sihuan@knhcloud:/volume4/dockume/traefik/external
+
+http:
+  services:
+    nginx:
+      loadBalancer:
+        servers:
+        # if it’s on localhost, then type in docker-host
+        - url: "http://172.24.0.4:80"
+
+  routers:
+    nginx:
+      entryPoints:
+        - web
+      rule: "Host(`traefik.vgate.keenetic.pro`)"
+      service: nginx
+      # tls:
+      #   certResolver: simple-resolver

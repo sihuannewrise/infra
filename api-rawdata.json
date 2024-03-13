@@ -1,0 +1,156 @@
+{
+	"routers": {
+		"acme-http@internal": {
+			"entryPoints": [
+				"web"
+			],
+			"service": "acme-http@internal",
+			"rule": "PathPrefix(`/.well-known/acme-challenge/`)",
+			"priority": 2147483647,
+			"status": "enabled",
+			"using": [
+				"web"
+			]
+		},
+		"api@internal": {
+			"entryPoints": [
+				"traefik"
+			],
+			"service": "api@internal",
+			"rule": "PathPrefix(`/api`)",
+			"priority": 2147483646,
+			"status": "enabled",
+			"using": [
+				"traefik"
+			]
+		},
+		"dashboard@internal": {
+			"entryPoints": [
+				"traefik"
+			],
+			"middlewares": [
+				"dashboard_redirect@internal",
+				"dashboard_stripprefix@internal"
+			],
+			"service": "dashboard@internal",
+			"rule": "PathPrefix(`/`)",
+			"priority": 2147483645,
+			"status": "enabled",
+			"using": [
+				"traefik"
+			]
+		},
+		"nginx@file": {
+			"entryPoints": [
+				"web"
+			],
+			"service": "nginx",
+			"rule": "Host(`traefik.vgate.keenetic.pro`)",
+			"status": "enabled",
+			"using": [
+				"web"
+			]
+		},
+		"whoami@docker": {
+			"entryPoints": [
+				"web"
+			],
+			"service": "whoami-nginx",
+			"rule": "Host(`whoami.xwick.ru`)",
+			"status": "enabled",
+			"using": [
+				"web"
+			]
+		}
+	},
+	"middlewares": {
+		"dashboard_redirect@internal": {
+			"redirectRegex": {
+				"regex": "^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$",
+				"replacement": "${1}/dashboard/",
+				"permanent": true
+			},
+			"status": "enabled",
+			"usedBy": [
+				"dashboard@internal"
+			]
+		},
+		"dashboard_stripprefix@internal": {
+			"stripPrefix": {
+				"prefixes": [
+					"/dashboard/",
+					"/dashboard"
+				]
+			},
+			"status": "enabled",
+			"usedBy": [
+				"dashboard@internal"
+			]
+		}
+	},
+	"services": {
+		"acme-http@internal": {
+			"status": "enabled",
+			"usedBy": [
+				"acme-http@internal"
+			]
+		},
+		"api@internal": {
+			"status": "enabled",
+			"usedBy": [
+				"api@internal"
+			]
+		},
+		"dashboard@internal": {
+			"status": "enabled",
+			"usedBy": [
+				"dashboard@internal"
+			]
+		},
+		"nginx@file": {
+			"loadBalancer": {
+				"servers": [
+					{
+						"url": "http://172.24.0.4:80"
+					}
+				],
+				"passHostHeader": true
+			},
+			"status": "enabled",
+			"usedBy": [
+				"nginx@file"
+			],
+			"serverStatus": {
+				"http://172.24.0.4:80": "UP"
+			}
+		},
+		"noop@internal": {
+			"status": "enabled"
+		},
+		"whoami-nginx@docker": {
+			"loadBalancer": {
+				"servers": [
+					{
+						"url": "http://172.24.0.6:80"
+					},
+					{
+						"url": "http://172.24.0.3:80"
+					},
+					{
+						"url": "http://172.24.0.5:80"
+					}
+				],
+				"passHostHeader": true
+			},
+			"status": "enabled",
+			"usedBy": [
+				"whoami@docker"
+			],
+			"serverStatus": {
+				"http://172.24.0.3:80": "UP",
+				"http://172.24.0.5:80": "UP",
+				"http://172.24.0.6:80": "UP"
+			}
+		}
+	}
+}

@@ -1,0 +1,34 @@
+# curl -H Host:traefik.vgate.keenetic.pro http://127.0.0.1
+
+version: '3'
+
+services:
+  nginx:
+    # image: nginx:stable-alpine3.17-slim
+    image: nginxdemos/hello
+    labels:
+      - traefik.enable=true
+      # - traefik.http.routers.nginx.rule=Host(`xwick.ru`) && Path(`/nginx`)
+      - traefik.http.routers.nginx.rule=Host(`nginx.traefik.vgate.keenetic.pro)
+      - traefik.http.routers.nginx.entrypoints=web
+      # - traefik.http.routers.nginx.tls.certresolver=simple-resolver
+      # - traefik.http.routers.nginx.service=nginx
+      # - traefik.http.services.nginx.loadbalancer.server.port=80
+    networks:
+      - traefik
+
+  whoami:
+    image: traefik/whoami
+    scale: 3
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`whoami.xwick.ru`)
+      - traefik.http.routers.whoami.entrypoints=web
+      # - traefik.http.routers.whoami.service=whoami
+      # - traefik.http.services.whoami.loadbalancer.server.port=80
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
