@@ -7,6 +7,7 @@ services:
   nginx:
     # image: nginx:stable-alpine3.17-slim
     image: nginxdemos/hello
+    container_name: nginx
     labels:
       - traefik.enable=true
       # - traefik.http.routers.nginx.rule=Host(`xwick.ru`) && Path(`/nginx`)

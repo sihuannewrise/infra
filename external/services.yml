@@ -3,18 +3,17 @@
 # scp -P 2222 external/services.yml sihuan@192.168.2.72:/volume4/dockume/traefik/external
 
 http:
+  routers:
+    to-nginx:
+      rule: "Host(`web.vgate.keenetic.pro`)"
+      service: nginx
+      # tls:
+      #   certResolver: simple-resolver
+
   services:
     nginx:
       loadBalancer:
         servers:
         # if it’s on localhost, then type in docker-host
-        - url: "http://172.24.0.3:80"
-
-  routers:
-    nginx:
-      entryPoints:
-        - web
-      rule: "Host(`web.vgate.keenetic.pro`)"
-      service: nginx
-      tls:
-        certResolver: simple-resolver
+        # - url: "http://172.24.0.3:80"
+        - url: "http://nginx:80"

@@ -39,28 +39,6 @@
 			"using": [
 				"traefik"
 			]
-		},
-		"nginx@file": {
-			"entryPoints": [
-				"web"
-			],
-			"service": "nginx",
-			"rule": "Host(`traefik.vgate.keenetic.pro`)",
-			"status": "enabled",
-			"using": [
-				"web"
-			]
-		},
-		"whoami@docker": {
-			"entryPoints": [
-				"web"
-			],
-			"service": "whoami-nginx",
-			"rule": "Host(`whoami.xwick.ru`)",
-			"status": "enabled",
-			"using": [
-				"web"
-			]
 		}
 	},
 	"middlewares": {
@@ -107,50 +85,8 @@
 				"dashboard@internal"
 			]
 		},
-		"nginx@file": {
-			"loadBalancer": {
-				"servers": [
-					{
-						"url": "http://172.24.0.4:80"
-					}
-				],
-				"passHostHeader": true
-			},
-			"status": "enabled",
-			"usedBy": [
-				"nginx@file"
-			],
-			"serverStatus": {
-				"http://172.24.0.4:80": "UP"
-			}
-		},
 		"noop@internal": {
 			"status": "enabled"
-		},
-		"whoami-nginx@docker": {
-			"loadBalancer": {
-				"servers": [
-					{
-						"url": "http://172.24.0.6:80"
-					},
-					{
-						"url": "http://172.24.0.3:80"
-					},
-					{
-						"url": "http://172.24.0.5:80"
-					}
-				],
-				"passHostHeader": true
-			},
-			"status": "enabled",
-			"usedBy": [
-				"whoami@docker"
-			],
-			"serverStatus": {
-				"http://172.24.0.3:80": "UP",
-				"http://172.24.0.5:80": "UP",
-				"http://172.24.0.6:80": "UP"
-			}
 		}
 	}
 }

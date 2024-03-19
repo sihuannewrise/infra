@@ -1,3 +1,4 @@
+## Static configuration
 # path to place the file
 # scp -P 2222 config/traefik.yml sihuan@knhcloud:/volume4/dockume/traefik/config
 # scp -P 2222 config/traefik.yml sihuan@192.168.2.72:/volume4/dockume/traefik/config
@@ -19,13 +20,13 @@ providers:
 
 entryPoints:
   web:
-    address: :80
+    address: ":80"
     # http:
     #   redirections:
     #     entryPoint:
     #       to: websecure
   websecure:
-    address: :443
+    address: ":443"
 
 certificatesResolvers:
   simple-resolver:
