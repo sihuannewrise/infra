@@ -39,6 +39,49 @@
 			"using": [
 				"traefik"
 			]
+		},
+		"to-nginx@file": {
+			"entryPoints": [
+				"web",
+				"websecure"
+			],
+			"service": "nginx",
+			"rule": "Host(`192.168.2.72`) || Host(`172.16.103.98`)",
+			"tls": {
+				"options": "default",
+				"certResolver": "simple-resolver"
+			},
+			"status": "enabled",
+			"using": [
+				"web",
+				"websecure"
+			]
+		},
+		"to-pgdatabase@file": {
+			"entryPoints": [
+				"postgresql"
+			],
+			"service": "pgdatabase",
+			"rule": "Host(`*`)",
+			"status": "enabled",
+			"using": [
+				"postgresql"
+			]
+		},
+		"web-to-websecure@internal": {
+			"entryPoints": [
+				"web"
+			],
+			"middlewares": [
+				"redirect-web-to-websecure@internal"
+			],
+			"service": "noop@internal",
+			"rule": "HostRegexp(`{host:.+}`)",
+			"priority": 2147483646,
+			"status": "enabled",
+			"using": [
+				"web"
+			]
 		}
 	},
 	"middlewares": {
@@ -64,6 +107,17 @@
 			"usedBy": [
 				"dashboard@internal"
 			]
+		},
+		"redirect-web-to-websecure@internal": {
+			"redirectScheme": {
+				"scheme": "https",
+				"port": "443",
+				"permanent": true
+			},
+			"status": "enabled",
+			"usedBy": [
+				"web-to-websecure@internal"
+			]
 		}
 	},
 	"services": {
@@ -85,8 +139,45 @@
 				"dashboard@internal"
 			]
 		},
+		"nginx@file": {
+			"loadBalancer": {
+				"servers": [
+					{
+						"url": "http://nginx:80"
+					}
+				],
+				"passHostHeader": true
+			},
+			"status": "enabled",
+			"usedBy": [
+				"to-nginx@file"
+			],
+			"serverStatus": {
+				"http://nginx:80": "UP"
+			}
+		},
 		"noop@internal": {
-			"status": "enabled"
+			"status": "enabled",
+			"usedBy": [
+				"web-to-websecure@internal"
+			]
+		},
+		"pgdatabase@file": {
+			"loadBalancer": {
+				"servers": [
+					{
+						"url": "http://postgresql:5432"
+					}
+				],
+				"passHostHeader": true
+			},
+			"status": "enabled",
+			"usedBy": [
+				"to-pgdatabase@file"
+			],
+			"serverStatus": {
+				"http://postgresql:5432": "UP"
+			}
 		}
 	}
 }

@@ -8,26 +8,12 @@ services:
     # image: nginx:stable-alpine3.17-slim
     image: nginxdemos/hello
     container_name: nginx
-    labels:
-      - traefik.enable=true
-      # - traefik.http.routers.nginx.rule=Host(`xwick.ru`) && Path(`/nginx`)
-      - traefik.http.routers.nginx.rule=Host(`nginx.traefik.vgate.keenetic.pro)
-      - traefik.http.routers.nginx.entrypoints=web
-      # - traefik.http.routers.nginx.tls.certresolver=simple-resolver
-      # - traefik.http.routers.nginx.service=nginx
-      # - traefik.http.services.nginx.loadbalancer.server.port=80
     networks:
       - traefik
 
   whoami:
     image: traefik/whoami
     # scale: 3
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.whoami.rule=Host(`whoami.xwick.ru`)
-      - traefik.http.routers.whoami.entrypoints=web
-      # - traefik.http.routers.whoami.service=whoami
-      # - traefik.http.services.whoami.loadbalancer.server.port=80
     networks:
       - traefik
 
