@@ -1,7 +1,7 @@
 ## Dynamic configuration
-# path to place the file
-# scp -P 2222 external/services.yml sihuan@knhcloud:/volume4/dockume/traefik/external
-# scp -P 2222 external/services.yml sihuan@192.168.2.72:/volume4/dockume/traefik/external
+## path to place the file
+## scp -P 2222 external/services.yml sihuan@knhcloud:/volume4/dockume/traefik/external
+## scp -P 2222 external/services.yml sihuan@192.168.2.72:/volume4/dockume/traefik/external
 
 http:
   routers:
