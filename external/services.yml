@@ -9,14 +9,14 @@ http:
       entryPoints:
         - "web"
         - "websecure"
-      rule: "Path(`/nginx`)"
+      rule: "Host(`192.168.2.72`) || Host(`172.16.103.98`)"
       service: nginx
       tls:
         certResolver: simple-resolver
     to-pgdatabase:
       entryPoints:
         - "postgresql"
-      rule: "HostSNI(`*`)"
+      rule: "Host(`*`)"
       service: pgdatabase
 
   services:
