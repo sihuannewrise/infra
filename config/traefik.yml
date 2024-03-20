@@ -3,8 +3,6 @@
 ## scp -P 2222 config/traefik.yml sihuan@knhcloud:/volume4/dockume/traefik/config
 ## scp -P 2222 config/traefik.yml sihuan@192.168.2.72:/volume4/dockume/traefik/config
 
-log:
-  level: DEBUG
 
 api:
   dashboard: true
@@ -31,13 +29,15 @@ entryPoints:
     address: ":5432"
 
 
-certificatesResolvers:
-  simple-resolver:
-    acme:
-      email: sihuannewrise@gmail.com
-      storage: /letsencrypt/acme.json
-      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
-      httpchallenge:
-        entrypoint: web
+# certificatesResolvers:
+#   simple-resolver:
+#     acme:
+#       email: sihuannewrise@gmail.com
+#       storage: /letsencrypt/acme.json
+#       caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+#       httpchallenge:
+#         entrypoint: web
 
 accesslog: true
+# log:
+#   level: DEBUG
