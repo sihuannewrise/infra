@@ -6,15 +6,25 @@
 http:
   routers:
     to-nginx:
-      rule: "Host(`web.vgate.keenetic.pro`)"
+      entryPoints:
+        - "web"
+        - "websecure"
+      rule: "Path(`/nginx`)"
       service: nginx
-      # tls:
-      #   certResolver: simple-resolver
+      tls:
+        certResolver: simple-resolver
+    to-pgdatabase:
+      entryPoints:
+        - "postgresql"
+      rule: "HostSNI(`*`)"
+      service: pgdatabase
 
   services:
     nginx:
       loadBalancer:
         servers:
-        # if it’s on localhost, then type in docker-host
-        # - url: "http://172.24.0.3:80"
         - url: "http://nginx:80"
+    pgdatabase:
+      loadBalancer:
+        servers:
+        - url: "http://postgresql:5432"
