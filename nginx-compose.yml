@@ -8,12 +8,8 @@ services:
     # image: nginx:stable-alpine3.17-slim
     image: nginxdemos/hello
     container_name: nginx
-    networks:
-      - traefik
-
-  whoami:
-    image: traefik/whoami
-    # scale: 3
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - traefik
 
