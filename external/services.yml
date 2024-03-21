@@ -10,7 +10,7 @@ http:
         - "web"
         - "websecure"
       # rule: "(Host(`192.168.2.72`) || Host(`172.16.103.98`)) && Path(`/nginx`)"
-      rule: "Host(`192.168.2.72`) || Host(`172.16.103.98`)"
+      rule: "Host(`192.168.2.72`, `172.16.103.98`)"
       service: nginx
     to-pgdatabase:
       entryPoints:
