@@ -3,6 +3,19 @@
 ## scp -P 2222 config/traefik.yml sihuan@knhcloud:/volume4/dockume/traefik/config
 ## scp -P 2222 config/traefik.yml sihuan@192.168.2.72:/volume4/dockume/traefik/config
 
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+  websecure:
+    address: ":443"
+  postgresql:
+    address: ":5432"
+  fief:
+    address: ":8000"
 
 api:
   dashboard: true
@@ -15,19 +28,6 @@ providers:
   file:
     directory: /external
     watch: true
-
-entryPoints:
-  web:
-    address: ":80"
-    http:
-      redirections:
-        entryPoint:
-          to: websecure
-  websecure:
-    address: ":443"
-  postgresql:
-    address: ":5432"
-
 
 # certificatesResolvers:
 #   simple-resolver:

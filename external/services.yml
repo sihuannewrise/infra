@@ -12,18 +12,31 @@ http:
       rule: "Host(`192.168.2.72`, `172.16.103.98`)"
       tls: {}
       service: nginx
-    to-pgdatabase:
+
+    to-fief-server:
+      entryPoints:
+        - "fief"
+      rule: "Host(`192.168.2.72`, `172.16.103.98`)"
+      service: fief-server
+
+    to-fief-postgres:
       entryPoints:
         - "postgresql"
-      rule: "Host(`*`)"
-      service: pgdatabase
+      rule: "Host(`192.168.2.72`, `172.16.103.98`)"
+      service: fief-postgres
 
   services:
     nginx:
       loadBalancer:
         servers:
         - url: "http://nginx:80"
-    pgdatabase:
+
+    fief-server:
       loadBalancer:
         servers:
-        - url: "http://postgresql:5432"
+        - url: "http://fief-server:8000"
+
+    fief-postgres:
+      loadBalancer:
+        servers:
+        - url: "http://fief-postgres:5432"
