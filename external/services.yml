@@ -9,21 +9,21 @@ http:
       entryPoints:
         - "web"
         - "websecure"
-      rule: "Host(`192.168.2.72`, `172.16.103.98`)"
+      rule: "Host(`192.168.2.72`)"
       tls: {}
       service: nginx
 
     to-fief-server:
       entryPoints:
         - "fief"
-      rule: "Host(`192.168.2.72`, `172.16.103.98`)"
+      rule: "Host(`192.168.2.72`)"
       service: fief-server
 
-    to-fief-postgres:
+    to-traefik:
       entryPoints:
-        - "postgresql"
-      rule: "Host(`192.168.2.72`, `172.16.103.98`)"
-      service: fief-postgres
+        - "traefik"
+      rule: "Host(`192.168.2.72`)"
+      service: traefik
 
   services:
     nginx:
@@ -36,7 +36,7 @@ http:
         servers:
         - url: "http://fief-server:8000"
 
-    fief-postgres:
+    traefik:
       loadBalancer:
         servers:
-        - url: "http://fief-postgres:5432"
+        - url: "http://proxy-server:8080"
