@@ -2,10 +2,13 @@ version: "3"
 
 services:
   fief-server:
-    image: ghcr.io/fief-dev/fief:latest
     container_name: fief-server
+    image: ghcr.io/fief-dev/fief:latest
     command: fief run-server --port ${PORT}
     env_file: stack.env
+    depends_on:
+      - fief-postgres
+      - fief-redis
     networks:
       - traefik
 
