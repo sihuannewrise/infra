@@ -1,6 +1,6 @@
 ## Dynamic configuration
 ## path to place the file
-## scp modular/external/services.yml sihuan@80.87.105.197:/home/sihuan/modular/dockume/traefik/external
+## scp MODULAR/external/services.yml sihuan@80.87.105.197:/home/sihuan/modular/dockume/traefik/external
 
 http:
   routers:

@@ -8,6 +8,7 @@ services:
     # image: nginx:stable-alpine3.17-slim
     image: nginxdemos/hello
     volumes:
+      - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
       - traefik
