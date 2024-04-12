@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  fief-server:
+  fief:
     container_name: fief-server
     image: ghcr.io/fief-dev/fief:0.27.0
     command: fief run-server --port 8000
@@ -9,6 +9,10 @@ services:
     depends_on:
       - postgres
       - redis
+    expose:
+      - "8000"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - traefik
 
@@ -17,6 +21,8 @@ services:
     image: ghcr.io/fief-dev/fief:latest
     command: fief run-worker -p 1 -t 1
     env_file: stack.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - traefik
 
@@ -60,6 +66,7 @@ services:
       test: "pg_isready -U \"${POSTGRES_USER}\" -d \"${POSTGRES_DB}\""
       timeout: 2s
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - postgres_data:/var/lib/postgresql/data
     networks:
       - traefik
@@ -69,6 +76,7 @@ services:
     image: redis:alpine
     command: redis-server --save 60 1 --loglevel warning
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - redis_data:/data
     networks:
       - traefik

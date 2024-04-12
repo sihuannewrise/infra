@@ -13,17 +13,17 @@ http:
       tls: {}
       service: nginx
 
-    to-fief-server:
-      entryPoints:
-        - "fief"
-      rule: "Host(`192.168.2.72`)"
-      service: fief-server
-
     to-traefik:
       entryPoints:
         - "traefik"
-      rule: "Host(`192.168.2.72`)"
+      rule: "Host(`localhost`)"
       service: traefik
+
+    to-fief:
+      entryPoints:
+        - "fief"
+      rule: "Host(`192.168.2.72`)"
+      service: fief
 
   services:
     nginx:
@@ -31,12 +31,12 @@ http:
         servers:
         - url: "http://nginx:80"
 
-    fief-server:
-      loadBalancer:
-        servers:
-        - url: "http://fief-server:8000"
-
     traefik:
       loadBalancer:
         servers:
         - url: "http://proxy-server:8080"
+
+    fief:
+      loadBalancer:
+        servers:
+        - url: "http://fief:8000"
