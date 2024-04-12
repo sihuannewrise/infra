@@ -24,6 +24,8 @@ http:
       entryPoints:
         - "websecure"
       rule: "Host(`fief.xwick.ru`)"
+      tls:
+        certResolver: letsencrypt
       service: fief-server
 
     to-traefik:
