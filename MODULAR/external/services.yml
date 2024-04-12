@@ -13,7 +13,7 @@ http:
       # middlewares:
       #   - traefik-auth
       tls:
-        certResolver: simple-resolver
+        certResolver: letsencrypt
         domains:
           - main: "xwick.ru"
             sans:
@@ -22,14 +22,14 @@ http:
 
     to-portainer:
       entryPoints:
-        - "web"
+        - "websecure"
       rule: "Host(`portainer.xwick.ru`)"
-      tls:
-        certResolver: simple-resolver
-        domains:
-          - main: "xwick.ru"
-            sans:
-              - "*.xwick.ru"
+      # tls:
+      #   certResolver: letsencrypt
+      #   domains:
+      #     - main: "xwick.ru"
+      #       sans:
+      #         - "*.xwick.ru"
       service: portainer
 
     to-fief-server:
@@ -42,12 +42,12 @@ http:
       entryPoints:
         - "web"
       rule: "Host(`traefik.xwick.ru`)"
-      tls:
-        certResolver: simple-resolver
-        domains:
-          - main: "xwick.ru"
-            sans:
-              - "*.xwick.ru"
+      # tls:
+      #   certResolver: letsencrypt
+      #   domains:
+      #     - main: "xwick.ru"
+      #       sans:
+      #         - "*.xwick.ru"
       service: traefik
 
   middlewares:

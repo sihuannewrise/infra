@@ -5,6 +5,7 @@ services:
     # image: traefik:v2.11.2
     image: traefik:latest
     ports:
+      - 22:22
       - 80:80
       - 443:443
       - 8080:8080
