@@ -1,5 +1,6 @@
 ## Dynamic configuration
 ## path to place the file
+## scp MODULAR/external/services.yml sihuan@xwick.ru:/home/sihuan/modular/dockume/traefik/external
 ## scp MODULAR/external/services.yml sihuan@80.87.105.197:/home/sihuan/modular/dockume/traefik/external
 
 http:
@@ -9,19 +10,28 @@ http:
         - "web"
         - "websecure"
       rule: "Host(`xwick.ru`)"
-      tls: {}
+      tls:
+        certResolver: simple-resolver
       service: nginx
+
+    to-portainer:
+      entryPoints:
+        - "portainer"
+      rule: "Host(`portainer.xwick.ru`)"
+      tls:
+        certResolver: simple-resolver
+      service: portainer
 
     to-fief-server:
       entryPoints:
         - "fief"
-      rule: "Host(`xwick.ru`)"
+      rule: "Host(`fief.xwick.ru`)"
       service: fief-server
 
     to-traefik:
       entryPoints:
         - "traefik"
-      rule: "Host(`xwick.ru`)"
+      rule: "Host(`traefik.xwick.ru`)"
       service: traefik
 
   services:
@@ -29,6 +39,11 @@ http:
       loadBalancer:
         servers:
         - url: "http://nginx:80"
+
+    portainer:
+      loadBalancer:
+        servers:
+        - url: "http://Portainer:9443"
 
     fief-server:
       loadBalancer:
