@@ -12,14 +12,14 @@ entryPoints:
           to: websecure
   websecure:
     address: ":443"
-  postgresql:
-    address: ":5432"
-  fief:
-    address: ":8000"
-  traefik:
-    address: ":8080"
-  portainer:
-    address: ":9443"
+  # postgresql:
+  #   address: ":5432"
+  # fief:
+  #   address: ":8000"
+  # traefik:
+  #   address: ":8080"
+  # portainer:
+  #   address: ":9443"
 
 api:
   dashboard: true
