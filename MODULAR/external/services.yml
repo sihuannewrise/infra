@@ -24,12 +24,6 @@ http:
       entryPoints:
         - "websecure"
       rule: "Host(`portainer.xwick.ru`)"
-      # tls:
-      #   certResolver: letsencrypt
-      #   domains:
-      #     - main: "xwick.ru"
-      #       sans:
-      #         - "*.xwick.ru"
       service: portainer
 
     to-fief-server:
@@ -42,12 +36,6 @@ http:
       entryPoints:
         - "web"
       rule: "Host(`traefik.xwick.ru`)"
-      # tls:
-      #   certResolver: letsencrypt
-      #   domains:
-      #     - main: "xwick.ru"
-      #       sans:
-      #         - "*.xwick.ru"
       service: traefik
 
   middlewares:
