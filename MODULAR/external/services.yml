@@ -20,13 +20,13 @@ http:
         #       - "*.xwick.ru"
       service: nginx
 
-    to-fief-server:
-      entryPoints:
-        - "websecure"
-      rule: "Host(`fief.xwick.ru`)"
-      tls:
-        certResolver: letsencrypt
-      service: fief-server
+    # to-fief-server:
+    #   entryPoints:
+    #     - "websecure"
+    #   rule: "Host(`fief.xwick.ru`)"
+    #   tls:
+    #     certResolver: letsencrypt
+    #   service: fief-server
 
     to-traefik:
       entryPoints:
@@ -47,10 +47,10 @@ http:
         servers:
         - url: "http://nginx:80"
 
-    fief-server:
-      loadBalancer:
-        servers:
-        - url: "http://fief-server:8000"
+    # fief-server:
+    #   loadBalancer:
+    #     servers:
+    #     - url: "http://fief-server:8000"
 
     traefik:
       loadBalancer:
