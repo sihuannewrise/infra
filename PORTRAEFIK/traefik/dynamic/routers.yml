@@ -1,0 +1,15 @@
+http:
+  routers:
+    to-traefik:
+      entryPoints:
+        - websecure
+      rule: HostRegexp(`{host:.+}`)
+      # middlewares:
+      #   - auth
+      service: traefik
+
+    to-portainer:
+      entryPoints:
+        - websecure
+      rule: Host(`portainer.vgate.keenetic.pro`)
+      service: portainer

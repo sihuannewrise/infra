@@ -1,0 +1,19 @@
+script: |
+  docker stop portainer
+  docker rm portainer
+
+  docker run -d \
+    # -p 8000:8000 \ # used for Edge Agent communication
+    -p 9443:9443 \
+    --name=portainer \
+    --hostname=portainer \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /share/Docker/PortainerEE/data:/data \
+    -v /usr/builtin/etc/certificate:/certs \
+    -v /etc/localtime:/etc/localtime \
+    portainer/portainer-ee:2.20.3 \
+    --sslcert /certs/ssl.crt \
+    --sslkey /certs/ssl.key
+
+docker run -d -p 9443:9443 --name portainer --hostname=portainer --restart=unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v /share/Docker/PortainerEE/data:/data -v /usr/builtin/etc/certificate:/certs -v /etc/localtime:/etc/localtime portainer/portainer-ee:2.20.3 --sslcert /certs/ssl.crt --sslkey /certs/ssl.key
