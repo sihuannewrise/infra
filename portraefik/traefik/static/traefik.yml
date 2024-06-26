@@ -1,6 +1,6 @@
 ## Static configuration
 ## path to place the file
-## scp -P 2222 PORTAFIK/traefik/static/traefik.yml sihuan@192.168.2.72:/share/dockume/portraefik/traefik/static
+## scp -P 2222 portraefik/traefik/static/traefik.yml sihuan@192.168.2.72:/share/dockume/portraefik/traefik/static
 
 entryPoints:
   web:
