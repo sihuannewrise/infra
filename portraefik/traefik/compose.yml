@@ -1,22 +1,22 @@
 ---
 ## path to place the file
-## scp -P 2222 PORTRAEFIK/compose.yml sihuan@knhcloud:/share/dockume/portraefik/traefik
+## scp -P 2222 portraefik/traefik/compose.yml sihuan@knhcloud:/share/dockume/portraefik/traefik
 version: "3.3"
 
 services:
   traefik:
-    container_name: traefik
     image: traefik:v2.11
+    container_name: traefik
     ports:
       - 80:80
       - 443:443
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
-      - traefik_data:/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - traefik_static:/etc/traefik
       - traefik_dynamic:/config/dynamic
-      - letsencrypt:/config/letsencrypt
+      - traefik_data:/config
+      - letsencrypt:/letsencrypt
 
   portainer:
     image: portainer/portainer-ee:2.20.3
@@ -34,7 +34,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /share/Docker/PortainerEE/data
+      device: /share/Docker/PortainerEE
       o: bind
   traefik_data:
     driver: local
@@ -60,3 +60,7 @@ volumes:
       type: none
       device: /share/dockume/portraefik/letsencrypt
       o: bind
+
+networks:
+  traefik:
+    external: true
