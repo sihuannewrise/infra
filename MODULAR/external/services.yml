@@ -1,0 +1,58 @@
+## DYNAMIC configuration
+## path to place the file
+## scp MODULAR/external/services.yml sihuan@xwick.ru:/home/sihuan/modular/dockume/traefik/external
+## scp MODULAR/external/services.yml sihuan@80.87.105.197:/home/sihuan/modular/dockume/traefik/external
+
+http:
+  routers:
+    to-nginx:
+      entryPoints:
+        - "web"
+        - "websecure"
+      rule: "Host(`xwick.ru`)"
+      # middlewares:
+      #   - traefik-auth
+      tls:
+        certResolver: letsencrypt
+        # domains:
+        #   - main: "xwick.ru"
+        #     sans:
+        #       - "*.xwick.ru"
+      service: nginx
+
+    # to-fief-server:
+    #   entryPoints:
+    #     - "websecure"
+    #   rule: "Host(`fief.xwick.ru`)"
+    #   tls:
+    #     certResolver: letsencrypt
+    #   service: fief-server
+
+    to-traefik:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`traefik.xwick.ru`)"
+      tls:
+        certResolver: letsencrypt
+      service: traefik
+
+  middlewares:
+    traefik-auth:
+      ipWhiteList:
+        sourceRange: 172.18.0.0/16
+
+  services:
+    nginx:
+      loadBalancer:
+        servers:
+        - url: "http://nginx:80"
+
+    # fief-server:
+    #   loadBalancer:
+    #     servers:
+    #     - url: "http://fief-server:8000"
+
+    traefik:
+      loadBalancer:
+        servers:
+        - url: "http://proxy-server:8080"
