@@ -13,10 +13,12 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - traefik_static:/etc/traefik
-      - traefik_dynamic:/config/dynamic
-      - traefik_data:/config
+      - static:/etc/traefik
+      - dynamic:/config/dynamic
+      - data:/config
       - letsencrypt:/letsencrypt
+    networks:
+      - traefik
 
   portainer:
     image: portainer/portainer-ee:2.20.3
@@ -28,27 +30,29 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/builtin/etc/certificate:/certs
       - portainer_data:/data
+    networks:
+      - traefik
 
 volumes:
   portainer_data:
     driver: local
     driver_opts:
       type: none
-      device: /share/Docker/PortainerEE
+      device: /share/Docker/PortainerEE/data
       o: bind
-  traefik_data:
+  data:
     driver: local
     driver_opts:
       type: none
       device: /share/dockume/portraefik/traefik
       o: bind
-  traefik_static:
+  static:
     driver: local
     driver_opts:
       type: none
       device: /share/dockume/portraefik/traefik/static
       o: bind
-  traefik_dynamic:
+  dynamic:
     driver: local
     driver_opts:
       type: none
