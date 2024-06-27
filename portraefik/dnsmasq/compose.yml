@@ -1,0 +1,30 @@
+---
+version: "3.3"
+
+services:
+  dnsmasq:
+    image: dockurr/dnsmasq:2.90
+    container_name: dnsmasq
+    ports:
+      - 53:53/udp
+      - 53:53/tcp
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - conf:/etc/dnsmasq.conf
+    networks:
+      - traefik
+
+volumes:
+  conf:
+    driver: local
+    driver_opts:
+      type: none
+      device: /share/dockume/portraefik/dnsmasq
+      o: bind
+
+networks:
+  traefik:
+    external: true
