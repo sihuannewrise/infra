@@ -2,29 +2,26 @@
 version: "3.3"
 
 services:
-  dnsmasq:
-    image: dockurr/dnsmasq:2.90
-    container_name: dnsmasq
+  resolver:
+    build: ./resolver
     ports:
-      - 53:53/udp
-      - 53:53/tcp
-    cap_add:
-      - NET_ADMIN
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - conf:/etc/dnsmasq.conf
+      - "53:53/udp"
     networks:
-      - traefik
+      local-dns:
+        ipv4_address: 192.168.1.101
 
-volumes:
-  conf:
-    driver: local
-    driver_opts:
-      type: none
-      device: /share/dockume/portraefik/dnsmasq
-      o: bind
+  authoritative:
+    image: coredns/coredns
+    volumes:
+      - "./authoritative:/etc/coredns"
+    networks:
+      local-dns:
+        ipv4_address: 192.168.1.102
+    command: -conf /etc/coredns/Corefile
 
 networks:
-  traefik:
-    external: true
+  local-dns:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
