@@ -13,10 +13,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - static:/etc/traefik
-      - dynamic:/config/dynamic
       - /share/dockume/portraefik/traefik:/config
       - /share/dockume/portraefik/letsencrypt:/letsencrypt
+      - static:/etc/traefik
+      - dynamic:/config/dynamic
     networks:
       - traefik
 
