@@ -5,19 +5,19 @@ services:
   resolver:
     build: ./resolver
     ports:
-      - "53:53/udp"
+      - 53:53/udp
     networks:
       local-dns:
         ipv4_address: 192.168.1.101
 
   authoritative:
     image: coredns/coredns
+    command: -conf /etc/coredns/Corefile
     volumes:
-      - "./authoritative:/etc/coredns"
+      - /share/dockume/portraefik/dnsmasq/authoritative:/etc/coredns
     networks:
       local-dns:
         ipv4_address: 192.168.1.102
-    command: -conf /etc/coredns/Corefile
 
 networks:
   local-dns:
