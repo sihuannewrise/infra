@@ -7,7 +7,7 @@ services:
     ports:
       - 53:53/udp
     networks:
-      local-dns:
+      local_dns:
         ipv4_address: 192.168.1.101
 
   authoritative:
@@ -16,11 +16,11 @@ services:
     volumes:
       - /share/dockume/portraefik/dnsmasq/authoritative:/etc/coredns
     networks:
-      local-dns:
+      local_dns:
         ipv4_address: 192.168.1.102
 
 networks:
-  local-dns:
+  local_dns:
     driver: bridge
     ipam:
       config:
