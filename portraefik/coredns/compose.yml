@@ -13,11 +13,11 @@ services:
   authoritative:
     image: coredns/coredns:1.11.1
     volumes:
-      - ./authoritative:/etc/coredns
+      - /share/dockume/portraefik/coredns/authoritative:/etc/coredns
     networks:
       local_dns:
         ipv4_address: 192.168.1.102
-    command: -conf /etc/coredns/Corefile
+    # command: -conf /etc/coredns/Corefile
 
 networks:
   local_dns:
