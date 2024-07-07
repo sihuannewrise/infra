@@ -1,0 +1,29 @@
+---
+version: "3.3"
+
+services:
+  coredns:
+    image: coredns/coredns:1.11.1
+    container_name: coredns
+    volumes:
+      - data:/etc/coredns
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 53:53/udp
+    command: -conf /etc/coredns/Corefile
+
+  ubuntu:
+    image: ubuntu
+    container_name: ubuntu
+    tty: true
+    command: /bin/bash
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+
+volumes:
+  data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /share/dockume/infra/coredns
+      o: bind
