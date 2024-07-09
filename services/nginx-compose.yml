@@ -7,6 +7,8 @@ services:
   nginx:
     # image: nginx:stable-alpine3.17-slim
     image: nginxdemos/hello
+    ports:
+      - 80:80
     volumes:
       - /etc/localtime:/etc/localtime:ro
     networks:

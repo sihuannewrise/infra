@@ -14,7 +14,7 @@ services:
     image: coredns/coredns:1.11.1
     user: ${UID}:${GID}
     volumes:
-      - /share/dockume/portraefik/coredns/authoritative:/etc/coredns
+      - /share/dockume/infra/coredns/authoritative:/etc/coredns
     networks:
       local_dns:
         ipv4_address: 192.168.1.102
