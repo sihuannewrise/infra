@@ -1,0 +1,5 @@
+knh.lan {
+    file /etc/coredns/zone/db.knh.lan
+    log
+    error
+}

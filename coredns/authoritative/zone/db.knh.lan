@@ -1,0 +1,16 @@
+$TTL 2d    ; default TTL for zone
+$ORIGIN knh.lan.
+; set fictitious email for RNAME
+@       IN    SOA      ns1.knh.lan. mail.knh.lan. (
+                       2024031801  ; Serial
+                       3600       ; Refresh (1 hour)
+                       600        ; Retry (12 min)
+                       86400      ; Negative Cache TTL
+                       3600       ; Minimum TTL (1 hour)
+                       )
+; Name server resource record for the domain
+        IN     NS      ns1.knh.lan.
+
+; Domain hosts includes NS records defined above
+ns1     IN     A       192.168.1.102
+www     IN     A       192.168.1.103
