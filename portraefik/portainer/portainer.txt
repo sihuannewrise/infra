@@ -2,7 +2,7 @@ script: |
   docker stop portainer
   docker rm portainer
 
-  docker run -d \
+  docker run --rm -d \
     # -p 8000:8000 \ # used for Edge Agent communication
     -p 9443:9443 \
     --name=portainer \
