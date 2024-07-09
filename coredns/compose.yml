@@ -2,28 +2,27 @@
 version: "3.3"
 
 services:
-  coredns:
-    image: coredns/coredns:1.11.1
-    container_name: coredns
-    volumes:
-      - data:/etc/coredns
-      - /etc/localtime:/etc/localtime:ro
+  resolver:
+    build: ./resolver
     ports:
       - 53:53/udp
+    networks:
+      local_dns:
+        ipv4_address: 192.168.1.101
+
+  authoritative:
+    image: coredns/coredns:1.11.1
+    user: ${UID}:${GID}
+    volumes:
+      - /share/dockume/portraefik/coredns/authoritative:/etc/coredns
+    networks:
+      local_dns:
+        ipv4_address: 192.168.1.102
     command: -conf /etc/coredns/Corefile
 
-  ubuntu:
-    image: ubuntu
-    container_name: ubuntu
-    tty: true
-    command: /bin/bash
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-
-volumes:
-  data:
-    driver: local
-    driver_opts:
-      type: none
-      device: /share/dockume/infra/coredns
-      o: bind
+networks:
+  local_dns:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
