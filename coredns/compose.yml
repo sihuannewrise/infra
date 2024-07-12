@@ -1,4 +1,9 @@
 ---
+# to avoid permission error
+# start this compose stack by command
+# UID=${UID} GID=${GID} docker compose up -d --build
+# stop either
+# UID=${UID} GID=${GID} docker compose down
 version: "3.3"
 
 services:
@@ -7,8 +12,8 @@ services:
     ports:
       - 53:53/udp
     networks:
-      local_dns:
-        ipv4_address: 192.168.1.101
+      traefik:
+        ipv4_address: 172.24.1.101
 
   authoritative:
     image: coredns/coredns:1.11.1
@@ -16,13 +21,10 @@ services:
     volumes:
       - /share/dockume/infra/coredns/authoritative:/etc/coredns
     networks:
-      local_dns:
-        ipv4_address: 192.168.1.102
+      traefik:
+        ipv4_address: 172.24.1.102
     command: -conf /etc/coredns/Corefile
 
 networks:
-  local_dns:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.1.0/24
+  traefik:
+    external: true
