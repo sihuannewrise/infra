@@ -13,5 +13,5 @@ $ORIGIN knh.lan.
 
 ; Domain hosts includes NS records defined above
 ns1     IN     A       172.24.1.102
-@       IN     A       172.24.1.2
+@       IN     A       172.24.1.3
 www     IN     CNAME    knh.lan.
