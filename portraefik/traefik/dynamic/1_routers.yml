@@ -6,11 +6,11 @@ http:
       entryPoints:
         - web
         - websecure
-      rule: Host(`knhcloud.vgate.keenetic.pro`)
+      rule: Host(`traefik.vgate.keenetic.pro`)
       service: traefik
 
     to-portainer:
       entryPoints:
         - websecure
-      rule: Host(`portainer.knh.lan`)
+      rule: Host(`portainer.vgate.keenetic.pro`)
       service: portainer
