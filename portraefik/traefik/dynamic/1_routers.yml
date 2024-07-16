@@ -1,0 +1,16 @@
+## scp -O -P 2222 portraefik/traefik/dynamic/*.yml sihuan@192.168.2.72:/share/dockume/portraefik/traefik/dynamic
+
+http:
+  routers:
+    to-traefik:
+      entryPoints:
+        - web
+        - websecure
+      rule: Host(`knhcloud.vgate.keenetic.pro`)
+      service: traefik
+
+    to-portainer:
+      entryPoints:
+        - websecure
+      rule: Host(`portainer.knh.lan`)
+      service: portainer

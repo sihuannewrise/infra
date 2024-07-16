@@ -1,0 +1,10 @@
+http:
+  services:
+    portainer:
+      loadBalancer:
+        servers:
+        - url: "http://portainer:9000"
+    traefik:
+      loadBalancer:
+        servers:
+        - url: "http://traefik:8080"
