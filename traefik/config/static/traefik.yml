@@ -1,4 +1,4 @@
-## scp -O -P 2222 portraefik/traefik/static/traefik.yml sihuan@192.168.2.72:/share/dockume/portraefik/traefik/static
+## scp -O -P 2222 traefik/config/static/traefik.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/static
 
 entryPoints:
   web:

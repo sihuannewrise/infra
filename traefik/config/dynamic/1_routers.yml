@@ -1,4 +1,4 @@
-## scp -O -P 2222 portraefik/traefik/dynamic/*.yml sihuan@192.168.2.72:/share/dockume/portraefik/traefik/dynamic
+## scp -O -P 2222 traefik/config/dynamic/*.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/dynamic
 
 http:
   routers:
