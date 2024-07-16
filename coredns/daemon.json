@@ -1,0 +1,7 @@
+{
+	"comment": "Place this file to /etc/docker/daemon.json in order to change the DNS settings of the Docker daemon. Then restart the docker service: sudo service docker restart",
+	"dns": [
+		"172.24.1.101",
+		"1.1.1.1"
+	]
+}
