@@ -2,15 +2,15 @@
 
 http:
   routers:
+    to-portainer:
+      entryPoints:
+        - websecure
+      rule: Host(`portainer.vgate.keenetic.pro`)
+      service: portainer
+
     to-traefik:
       entryPoints:
         - web
         - websecure
       rule: Host(`traefik.vgate.keenetic.pro`)
       service: traefik
-
-    to-portainer:
-      entryPoints:
-        - websecure
-      rule: Host(`portainer.vgate.keenetic.pro`)
-      service: portainer
