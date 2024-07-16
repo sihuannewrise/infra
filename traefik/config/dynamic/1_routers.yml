@@ -1,4 +1,5 @@
 ## scp -O -P 2222 traefik/config/dynamic/*.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/dynamic
+## scp -O -P 2222 traefik/config/dynamic/1_routers.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/dynamic
 
 http:
   routers:
@@ -12,5 +13,5 @@ http:
       entryPoints:
         - web
         - websecure
-      rule: Host(`traefik.vgate.keenetic.pro`)
+      rule: Host(`knh.vgate.keenetic.pro`)
       service: traefik
