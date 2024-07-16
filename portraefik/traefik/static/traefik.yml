@@ -1,3 +1,5 @@
+## scp -O -P 2222 portraefik/traefik/static/traefik.yml sihuan@192.168.2.72:/share/dockume/portraefik/traefik/static
+
 entryPoints:
   web:
     address: :80
@@ -11,10 +13,10 @@ entryPoints:
     #   tls:
     #     certResolver: letsencrypt
     #     domains:
-    #       - main: xwick.ru
+    #       - main: knh.lan
     #         sans:
-    #           - api.xwick.ru
-    #           - dev.xwick.ru
+    #           - api.knh.lan
+    #           - dev.knh.lan
 
 api:
   dashboard: true

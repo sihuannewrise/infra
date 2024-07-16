@@ -24,6 +24,8 @@ services:
     image: portainer/portainer-ee:2.20.3
     container_name: portainer
     hostname: portainer
+    ports:
+      - 9443:9443
     command: -H unix:///var/run/docker.sock
     restart: always
     volumes:
