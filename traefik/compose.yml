@@ -1,21 +1,25 @@
 ---
 ## path to place the file
-## scp -P 2222 traefik/compose.yml sihuan@192.168.2.72:/share/dockume/infra/traefik
+## scp -O -P 2222 traefik/compose.yml sihuan@192.168.2.72:/share/dockume/infra/traefik
+## docker compose up -d
+## docker compose down
 version: "3.3"
 
 services:
   traefik:
     image: traefik:v2.11
     container_name: traefik
+    hostname: traefik
     ports:
       - 80:80
+      - 8080:8080
       - 443:443
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /share/dockume/infra/letsencrypt:/letsencrypt
+      - /share/dockume/infra/traefik:/config
       - /share/dockume/infra/traefik/static:/etc/traefik
-      - /share/dockume/infra/traefik/dynamic:/config/dynamic
+      - /share/dockume/infra/letsencrypt:/letsencrypt
     networks:
       - traefik
 
@@ -32,6 +36,13 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/builtin/etc/certificate:/certs
       - /share/Docker/PortainerEE/data:/data
+    networks:
+      - traefik
+
+  whoami:
+    image: traefik/whoami
+    labels:
+      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
     networks:
       - traefik
 

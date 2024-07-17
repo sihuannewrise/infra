@@ -11,7 +11,8 @@ http:
 
     to-traefik:
       entryPoints:
-        - web
         - websecure
-      rule: Host(`traefik.vgate.keenetic.pro`)
+      rule: Host(`traefik.docker.localhost`)
+      # middlewares:
+      #   - auth
       service: traefik

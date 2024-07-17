@@ -1,4 +1,5 @@
 ## scp -O -P 2222 traefik/config/static/traefik.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/static
+## http://localhost:8080/api/rawdata
 
 entryPoints:
   web:
@@ -25,7 +26,7 @@ api:
 providers:
   docker:
     network: traefik
-    exposedByDefault: false
+    # exposedByDefault: false
   file:
     directory: /config/dynamic
     watch: true
