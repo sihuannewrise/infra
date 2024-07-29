@@ -1,0 +1,40 @@
+http:
+  routers:
+    to-pihole:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.vgate.keenetic.pro`) && PathPrefix(`/pihole`)
+      # middlewares:
+      #   - auth
+      service: pihole
+
+    to-portainer:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.vgate.keenetic.pro`) && PathPrefix(`/portainer`)
+      service: portainer
+
+    to-traefik:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.vgate.keenetic.pro`) && PathPrefix(`/traefik`)
+      # middlewares:
+      #   - auth
+      service: traefik
+  middlewares:
+    auth:
+      basicAuth:
+        usersFile: /config/usersfile
+  services:
+    pihole:
+      loadBalancer:
+        servers:
+        - url: "http://pihole:3001"
+    portainer:
+      loadBalancer:
+        servers:
+        - url: "http://portainer:9000"
+    traefik:
+      loadBalancer:
+        servers:
+        - url: "http://traefik:8080"
