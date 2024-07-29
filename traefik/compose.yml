@@ -31,7 +31,7 @@ services:
     hostname: portainer
     ports:
       - 9443:9443
-    command: -H unix:///var/run/docker.sock
+    command: "--sslcert /certs/ssl.pem --sslkey /certs/ssl.pem"
     restart: always
     volumes:
       - /etc/localtime:/etc/localtime:ro
