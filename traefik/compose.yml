@@ -7,12 +7,14 @@ version: "3.3"
 
 services:
   traefik:
-    image: traefik:v2.11
+    image: traefik:v2.11.2
     container_name: traefik
     hostname: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
       - 80:80
-      - 8080:8080
       - 443:443
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -36,13 +38,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/builtin/etc/certificate:/certs
       - /share/Docker/PortainerEE/data:/data
-    networks:
-      - traefik
-
-  whoami:
-    image: traefik/whoami
-    labels:
-      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
     networks:
       - traefik
 

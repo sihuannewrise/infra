@@ -26,7 +26,7 @@ api:
 providers:
   docker:
     network: traefik
-    # exposedByDefault: false
+    exposedByDefault: false
   file:
     directory: /config/dynamic
     watch: true

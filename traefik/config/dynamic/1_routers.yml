@@ -3,16 +3,24 @@
 
 http:
   routers:
-    # to-portainer:
-    #   entryPoints:
-    #     - websecure
-    #   rule: Host(`portainer.vgate.keenetic.pro`)
-    #   service: portainer
+    to-pihole:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.vgate.keenetic.pro`) && PathPrefix(`/pihole`)
+      # middlewares:
+      #   - auth
+      service: pihole
+
+    to-portainer:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.vgate.keenetic.pro`) && PathPrefix(`/portainer`)
+      service: portainer
 
     to-traefik:
       entryPoints:
         - websecure
-      rule: Host(`traefik.docker.localhost`)
+      rule: Host(`knh.vgate.keenetic.pro`) && PathPrefix(`/traefik`)
       # middlewares:
       #   - auth
       service: traefik

@@ -1,9 +1,15 @@
 http:
   services:
+    pihole:
+      loadBalancer:
+        servers:
+        - url: "http://pihole:3001"
+
     portainer:
       loadBalancer:
         servers:
         - url: "http://portainer:9000"
+
     traefik:
       loadBalancer:
         servers:

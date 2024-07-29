@@ -1,0 +1,11 @@
+services:
+  pihole:
+    container_name: pihole
+    hostname: pihole
+    image: pihole/pihole:2024.07.0
+    env_file: stack.env
+    volumes:
+      - /share/Docker/pihole-docker/etc-pihole:/etc/pihole
+      - /share/Docker/pihole-docker/etc-dnsmasq.d:/etc/dnsmasq.d
+    restart: unless-stopped
+    network_mode: host
