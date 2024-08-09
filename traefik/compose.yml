@@ -23,8 +23,6 @@ services:
       - /share/dockume/infra/letsencrypt:/letsencrypt
     networks:
       - traefik
-    extra_hosts:
-      - host.docker.internal:host-gateway
 
   portainer:
     image: portainer/portainer-ee:2.20.3
