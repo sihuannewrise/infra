@@ -1,5 +1,4 @@
-version: "3"
-
+---
 services:
   fief:
     container_name: fief-server
@@ -63,7 +62,7 @@ services:
     healthcheck:
       interval: 10s
       retries: 10
-      test: "pg_isready -U \"${POSTGRES_USER}\" -d \"${POSTGRES_DB}\""
+      test: 'pg_isready -U "${POSTGRES_USER}" -d "${POSTGRES_DB}"'
       timeout: 2s
     volumes:
       - /etc/localtime:/etc/localtime:ro
