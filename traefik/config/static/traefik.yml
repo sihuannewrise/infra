@@ -10,14 +10,14 @@ entryPoints:
           to: websecure
   websecure:
     address: :443
-    # http:
-    #   tls:
-    #     certResolver: letsencrypt
-    #     domains:
-    #       - main: knh.lan
-    #         sans:
-    #           - api.knh.lan
-    #           - dev.knh.lan
+    http:
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: knh.cloud
+            sans:
+              - portainer.knh.cloud
+              - traefik.knh.cloud
 
 api:
   dashboard: true
@@ -36,11 +36,17 @@ certificatesResolvers:
     acme:
       email: sihuannewrise@gmail.com
       storage: /letsencrypt/acme.json
-      # caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory
       httpchallenge:
         entrypoint: web
 
-accesslog: true
+accessLog:
+  true
+  # filePath: /config/traefik-log.log
+  # bufferingSize: 100 # Configuring a buffer of 100 lines
+  # filters:
+  #   statusCodes:
+  #     - 400-499
 
 log:
   level: ERROR

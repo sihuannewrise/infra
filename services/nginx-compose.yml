@@ -1,14 +1,10 @@
 # curl -H Host:web.vgate.keenetic.pro http://127.0.0.1
 # curl -H Host:whoami.xwick.ru http://127.0.0.1
 
-version: '3'
-
 services:
   nginx:
     # image: nginx:stable-alpine3.17-slim
     image: nginxdemos/hello
-    ports:
-      - 80:80
     volumes:
       - /etc/localtime:/etc/localtime:ro
     networks:
