@@ -11,7 +11,7 @@ services:
       - traefik
 
   tuna:
-    image: yuccastream/tuna:latest
+    image: yuccastream/tuna:0.17.0
     command: http nginx:80 --inspect=false
     restart: always
     depends_on:
