@@ -10,6 +10,18 @@ services:
     networks:
       - traefik
 
+  tuna:
+    image: yuccastream/tuna:latest
+    command: http nginx:80 --inspect=false
+    restart: always
+    depends_on:
+      - nginx
+    env_file: stack.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - traefik
+
 networks:
   traefik:
     external: true
