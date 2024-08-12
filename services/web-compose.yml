@@ -12,7 +12,7 @@ services:
 
   tuna:
     image: yuccastream/tuna:0.17.0
-    command: http nginx:80 --inspect=false
+    command: http nginx:80
     restart: always
     depends_on:
       - nginx
