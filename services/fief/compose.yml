@@ -66,6 +66,7 @@ services:
       timeout: 2s
     volumes:
       - /etc/localtime:/etc/localtime:ro
+      - pg_multidb:/docker-entrypoint-initdb.d
       - postgres_data:/var/lib/postgresql/data
     networks:
       - traefik
@@ -83,6 +84,17 @@ services:
 volumes:
   redis_data:
   postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /share/dockume/db/postgres/data
+      o: bind
+  pg_multidb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /share/dockume/db/postgres/pg_multidb
+      o: bind
 
 networks:
   traefik:

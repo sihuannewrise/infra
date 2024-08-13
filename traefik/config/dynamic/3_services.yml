@@ -1,22 +1,31 @@
 http:
   services:
-    web:
+    fief:
       loadBalancer:
         servers:
-          - url: http://nginx:80
+          - url: http://fief:8000
+
     nas:
       loadBalancer:
         servers:
           - url: http://192.168.2.72:8760
+
     pihole:
       loadBalancer:
         servers:
           - url: http://pihole:3001
+
     portainer:
       loadBalancer:
         servers:
           - url: http://portainer:9000
+
     traefik:
       loadBalancer:
         servers:
           - url: http://traefik:8080
+
+    web:
+      loadBalancer:
+        servers:
+          - url: http://nginx:80
