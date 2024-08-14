@@ -71,23 +71,8 @@ services:
 
 volumes:
   postgres_data:
-    driver: local
-    driver_opts:
-      type: none
-      device: /share/dockume/db/postgres/data
-      o: bind
   pgadmin_data:
-    driver: local
-    driver_opts:
-      type: none
-      device: /share/dockume/db/pgadmin/data
-      o: bind
   redis_data:
-    driver: local
-    driver_opts:
-      type: none
-      device: /share/dockume/db/redis/data
-      o: bind
 
 networks:
   traefik:

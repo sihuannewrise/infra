@@ -12,7 +12,7 @@ function create_database() {
 	database=$1
   user=$2
   password=$3
-  echo "Creating database '$database' with creds: user '$user', password '$password'"
+  echo "Creating Database '$database' with creds: User '$user', Password '$password'"
   psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
     CREATE USER $user with encrypted password '$password';
     CREATE DATABASE $database;
@@ -21,7 +21,7 @@ EOSQL
 }
 
 if [ -n "$POSTGRES_MULTI_DB" ]; then
-  echo "Multiple database creation requested: $POSTGRES_MULTI_DB"
+  echo -e "\nMultiple database creation requested: $POSTGRES_MULTI_DB"
   for item in $(echo $POSTGRES_MULTI_DB | tr ',' ' '); do
     db=$(echo $item | awk -F":" '{print $1}')
     user=$(echo $item | awk -F":" '{print $2}')
@@ -30,7 +30,6 @@ if [ -n "$POSTGRES_MULTI_DB" ]; then
     then
       pwd=$user
     fi
-    echo "db: $db; user: $user; pass $pwd"
     create_database $db $user $pwd
   done
   echo "Multiple databases created!"
