@@ -27,6 +27,14 @@ http:
       rule: Host(`pihole.knh.cloud`) && PathPrefix(`/admin`)
       service: pihole
 
+    to-pgadmin:
+      entryPoints:
+        - websecure
+      rule: Host(`pgadmin.knh.cloud`)
+      middlewares:
+        - auth
+      service: pgadmin
+
     to-portainer:
       entryPoints:
         - websecure

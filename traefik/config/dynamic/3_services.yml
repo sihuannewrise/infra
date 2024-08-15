@@ -15,6 +15,11 @@ http:
         servers:
           - url: http://pihole:3001
 
+    pgadmin:
+      loadBalancer:
+        servers:
+          - url: http://pgadmin:80
+
     portainer:
       loadBalancer:
         servers:
