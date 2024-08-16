@@ -16,6 +16,10 @@ entryPoints:
         domains:
           - main: knh.cloud
             sans:
+              - fief.knh.cloud
+              - nas.knh.cloud
+              - pgadmin.knh.cloud
+              - pihole.knh.cloud
               - portainer.knh.cloud
               - traefik.knh.cloud
 
