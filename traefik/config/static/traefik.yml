@@ -42,8 +42,8 @@ certificatesResolvers:
       email: sihuannewrise@gmail.com
       storage: /letsencrypt/acme.json
       caServer: https://acme-staging-v02.api.letsencrypt.org/directory
-      httpchallenge:
-        entrypoint: web
+      httpChallenge:
+        entryPoint: web
 
 accessLog:
   true
