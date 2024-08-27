@@ -1,0 +1,20 @@
+---
+services:
+  nocodb:
+    image: nocodb/nocodb:0.255.0
+    container_name: nocodb
+    env_file: stack.env
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    volumes:
+      - nocodb_data:/usr/app/data
+    networks:
+      - traefik
+
+volumes:
+  nocodb_data:
+
+networks:
+  traefik:
+    external: true
