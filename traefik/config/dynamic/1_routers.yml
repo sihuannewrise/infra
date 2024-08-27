@@ -21,6 +21,12 @@ http:
       rule: Host(`nas.knh.cloud`)
       service: nas
 
+    to-nocodb:
+      entryPoints:
+        - websecure
+      rule: Host(`nocodb.knh.cloud`)
+      service: nocodb
+
     to-pihole:
       entryPoints:
         - websecure

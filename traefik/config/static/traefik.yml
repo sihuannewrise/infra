@@ -18,6 +18,7 @@ entryPoints:
             sans:
               - fief.knh.cloud
               - nas.knh.cloud
+              - nocodb.knh.cloud
               - pgadmin.knh.cloud
               - pihole.knh.cloud
               - portainer.knh.cloud
