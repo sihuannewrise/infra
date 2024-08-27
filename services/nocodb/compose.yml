@@ -8,6 +8,7 @@ services:
     ports:
       - 8080:8080
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - nocodb_data:/usr/app/data
     networks:
       - traefik

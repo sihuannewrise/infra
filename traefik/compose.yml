@@ -25,7 +25,7 @@ services:
       - traefik
 
   portainer:
-    image: portainer/portainer-ee:2.20.3
+    image: portainer/portainer-ee:2.21.0
     container_name: portainer
     hostname: portainer
     ports:
