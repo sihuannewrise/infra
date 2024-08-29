@@ -1,0 +1,19 @@
+@baseUrl = https://nocodb.knh.cloud/api/v2
+@authToken = IlHmicaslod_aRVFvXS6oUVj4eW-2NYqQzrSSZGF
+@baseIdTelecom = pv56l9gyoi3fvae
+@tableIdBeeline = mpmbm8wsz4g9cza
+
+### Change field display title
+PATCH {{baseUrl}}/meta/columns/cxw5vu7s23hww8p
+Content-Type: application/json
+xc-token: {{authToken}}
+
+{
+  "column_name": "usagNationalActvAmt",
+  "title": "'Междугородние звонки"
+}
+
+### meta API
+GET {{baseUrl}}/meta/bases/{{baseIdTelecom}}/users
+Content-Type: application/json
+xc-token: {{authToken}}
