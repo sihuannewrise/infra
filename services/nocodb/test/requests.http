@@ -14,6 +14,6 @@ xc-token: {{authToken}}
 }
 
 ### meta API
-GET {{baseUrl}}/meta/bases/{{baseIdTelecom}}/users
+GET {{baseUrl}}/meta/tables/{{tableIdBeeline}}/columns
 Content-Type: application/json
 xc-token: {{authToken}}
