@@ -4,13 +4,13 @@
 @tableIdBeeline = mpmbm8wsz4g9cza
 
 ### Change field display title
-PATCH {{baseUrl}}/meta/columns/cxw5vu7s23hww8p
+PATCH {{baseUrl}}/meta/columns/cwsxtyjj361ox12
 Content-Type: application/json
 xc-token: {{authToken}}
 
 {
-  "column_name": "usagNationalActvAmt",
-  "title": "Междугородние звонки"
+  "column_name": "usagSmsActvAmt",
+  "title": "SMS/MMS"
 }
 
 ### meta API
