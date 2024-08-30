@@ -10,7 +10,7 @@ xc-token: {{authToken}}
 
 {
   "column_name": "usagNationalActvAmt",
-  "title": "'Междугородние звонки"
+  "title": "Междугородние звонки"
 }
 
 ### meta API
