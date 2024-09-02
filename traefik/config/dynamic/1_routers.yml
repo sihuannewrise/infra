@@ -9,6 +9,12 @@ http:
       rule: Host(`knh.cloud`)
       service: web
 
+    to-coder:
+      entryPoints:
+        - websecure
+      rule: Host(`coder.knh.cloud`)
+      service: coder
+
     to-fief:
       entryPoints:
         - websecure

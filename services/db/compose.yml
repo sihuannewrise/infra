@@ -59,10 +59,10 @@ services:
     networks:
       - traefik
 
-  redis:
+  fief_redis:
     container_name: fief_redis
-    image: redis:alpine
-    command: redis-server --save 60 1 --loglevel warning
+    image: redis:7.4.0-alpine
+    command: redis-server --save 60 1 --loglevel warning --bind 0.0.0.0
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - redis_data:/data
