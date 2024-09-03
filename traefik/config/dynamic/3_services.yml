@@ -3,7 +3,7 @@ http:
     coder:
       loadBalancer:
         servers:
-          - url: http://192.168.2.67:3000
+          - url: http://coder:7080
 
     fief:
       loadBalancer:
