@@ -5,6 +5,8 @@ services:
     ports:
       - 7080:7080
     env_file: stack.env
+    group_add:
+     - 1002
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
