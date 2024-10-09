@@ -12,7 +12,7 @@ script: |
     -v /share/Docker/PortainerEE/data:/data \
     -v /usr/builtin/etc/certificate:/certs \
     -v /etc/localtime:/etc/localtime \
-    portainer/portainer-ee:2.20.3 \
+    portainer/portainer-ee:2.22.0 \
     --sslcert /certs/ssl.crt \
     --sslkey /certs/ssl.key
 

@@ -24,22 +24,6 @@ services:
     networks:
       - traefik
 
-  portainer:
-    image: portainer/portainer-ee:2.21.0
-    container_name: portainer
-    hostname: portainer
-    ports:
-      - 9443:9443
-    command: "--sslcert /certs/ssl.pem --sslkey /certs/ssl.pem"
-    restart: always
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/builtin/etc/certificate:/certs
-      - /share/Docker/PortainerEE/data:/data
-    networks:
-      - traefik
-
 networks:
   traefik:
     external: true

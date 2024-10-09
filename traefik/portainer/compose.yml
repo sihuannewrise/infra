@@ -1,0 +1,27 @@
+---
+## path to place the file
+## scp traefik/portainer/compose.yml root@192.168.2.91:/usr/Docker/PortainerEE/data
+## scp traefik/portainer/*.pem root@192.168.2.91:/usr/builtin/etc/certificate
+## docker compose up -d
+## docker compose down
+
+services:
+  portainer:
+    image: portainer/portainer-ee:2.22.0
+    container_name: portainer
+    hostname: portainer
+    ports:
+      - 9443:9443
+    command: "--sslcert /certs/cert.pem --sslkey /certs/key.pem"
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/builtin/etc/certificate:/certs
+      - /usr/Docker/PortainerEE/data:/data
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
