@@ -1,0 +1,21 @@
+---
+services:
+  minio:
+    image: quay.io/minio/minio:1.29.0
+    container_name: minio
+    hostname: minio
+    env_file: stack.env
+    ports:
+      - 9000:9000
+      - 9001:9001
+    command: 'server /data --console-address ":9001"'
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /volume4/minio/data:/data
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
