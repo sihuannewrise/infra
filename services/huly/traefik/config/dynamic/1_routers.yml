@@ -1,0 +1,46 @@
+## scp -O -P 2222 traefik/config/dynamic/*.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/dynamic
+## scp -O -P 2222 traefik/config/dynamic/1_routers.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/dynamic
+
+http:
+  routers:
+    to-traefik:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.cloud`) && PathPrefix(`/traefik`)
+      middlewares:
+        - strip-prefix-traefik
+      service: traefik
+
+    to-rekoni:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.cloud`) && PathPrefix(`/rekoni`)
+      middlewares:
+        - rekoni-stripprefix
+      service: rekoni
+
+    to-transactor:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.cloud`)
+      service: transactor
+
+    to-collaborator:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.cloud`)
+      service: collaborator
+
+    to-account:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.cloud`) && PathPrefix(`/accounts`)
+      middlewares:
+        - account-stripprefix
+      service: account
+
+    to-front:
+      entryPoints:
+        - websecure
+      rule: Host(`knh.cloud`)
+      service: front

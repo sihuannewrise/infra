@@ -1,0 +1,67 @@
+## scp -O -P 2222 traefik/config/static/traefik.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/static
+## http://localhost:8080/api/rawdata
+
+entryPoints:
+  collaborator:
+    address: :3078  # for collaborator wss
+  transactor:
+    address: :3333  # for transactor wss
+  web:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+  websecure:
+    address: :443
+    http:
+      tls:
+        certResolver: letsencrypt
+    #     domains:
+    #       - main: knh.cloud
+    #         sans:
+    #           - fief.knh.cloud
+    #           - nas.knh.cloud
+    #           - nocodb.knh.cloud
+    #           - pgadmin.knh.cloud
+    #           - pihole.knh.cloud
+    #           - portainer.knh.cloud
+    #           - traefik.knh.cloud
+
+api:
+  insecure: true
+  dashboard: true
+
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+providers:
+  docker:
+    network: traefik-public
+    exposedByDefault: false
+  file:
+    directory: /config/dynamic
+    watch: true
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: sihuannewrise@gmail.com
+      storage: /letsencrypt/acme.json
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory  # For testing, comment out for production
+      tlsChallenge: true
+      # httpChallenge:
+      #   entryPoint: web
+
+accessLog:
+  true
+  # filePath: /config/traefik.log
+  # bufferingSize: 100 # Configuring a buffer of 100 lines
+  # filters:
+  #   statusCodes:
+  #     - 400-499
+
+log:
+  level: ERROR
+  # level: DEBUG" # set to INFO for production

@@ -1,0 +1,31 @@
+http:
+  services:
+    traefik:
+      loadBalancer:
+        servers:
+          - url: http://traefik:80
+
+    rekoni:
+      loadBalancer:
+        servers:
+          - url: http://rekoni:4004
+
+    transactor:
+      loadBalancer:
+        servers:
+          - url: http://transactor:3333
+
+    collaborator:
+      loadBalancer:
+        servers:
+          - url: http://collaborator:3078
+
+    account:
+      loadBalancer:
+        servers:
+          - url: http://account:3000
+
+    front:
+      loadBalancer:
+        servers:
+          - url: http://front:8080

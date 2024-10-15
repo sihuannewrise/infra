@@ -1,0 +1,20 @@
+http:
+  middlewares:
+    auth:
+      basicAuth:
+        usersFile: /config/usersfile
+
+    strip-prefix-traefik:
+      stripPrefix:
+        prefixes:
+          - /traefik
+
+    rekoni-stripprefix:
+      stripPrefix:
+        prefixes:
+          - /rekoni
+
+    account-stripprefix:
+      stripPrefix:
+        prefixes:
+          - /accounts
