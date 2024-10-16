@@ -12,7 +12,7 @@ services:
     hostname: portainer
     ports:
       - 9443:9443
-    command: "--sslcert /certs/cert.pem --sslkey /certs/key.pem"
+    command: --sslcert /certs/cert.pem --sslkey /certs/key.pem
     restart: always
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -20,8 +20,7 @@ services:
       - /usr/builtin/etc/certificate:/certs
       - /usr/Docker/PortainerEE/data:/data
     networks:
-      - traefik
+      - portainer
 
 networks:
-  traefik:
-    external: true
+  portainer:

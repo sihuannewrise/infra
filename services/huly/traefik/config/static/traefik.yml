@@ -1,11 +1,7 @@
-## scp -O -P 2222 traefik/config/static/traefik.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/static
+## scp services/huly/traefik/config/static/traefik.yml root@192.168.2.91:/share/infra/traefik/static
 ## http://localhost:8080/api/rawdata
 
 entryPoints:
-  collaborator:
-    address: :3078  # for collaborator wss
-  transactor:
-    address: :3333  # for transactor wss
   web:
     address: :80
     http:
@@ -27,6 +23,10 @@ entryPoints:
     #           - pihole.knh.cloud
     #           - portainer.knh.cloud
     #           - traefik.knh.cloud
+  transactor:
+    address: :3333  # for transactor wss
+  collaborator:
+    address: :3078  # for collaborator wss
 
 api:
   insecure: true
@@ -41,7 +41,7 @@ providers:
     network: traefik-public
     exposedByDefault: false
   file:
-    directory: /config/dynamic
+    directory: /config
     watch: true
 
 certificatesResolvers:

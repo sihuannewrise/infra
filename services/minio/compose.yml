@@ -1,7 +1,7 @@
 ---
 services:
   minio:
-    image: quay.io/minio/minio:1.29.0
+    image: quay.io/minio/minio:RELEASE.2024-10-02T17-50-41Z
     container_name: minio
     hostname: minio
     env_file: stack.env
@@ -13,9 +13,4 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /volume4/minio/data:/data
-    networks:
-      - traefik
-
-networks:
-  traefik:
-    external: true
+    network_mode: host

@@ -1,12 +1,11 @@
-## scp -O -P 2222 traefik/config/dynamic/*.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/dynamic
-## scp -O -P 2222 traefik/config/dynamic/1_routers.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/dynamic
+## scp services/huly/traefik/config/dynamic/*.yml root@192.168.2.91:/share/infra/traefik
 
 http:
   routers:
     to-traefik:
       entryPoints:
         - websecure
-      rule: Host(`knh.cloud`) && PathPrefix(`/traefik`)
+      rule: Host(`knh.cloud`) && (PathPrefix(`/api`) || PathPrefix(`/traefik`))
       middlewares:
         - strip-prefix-traefik
       service: traefik
