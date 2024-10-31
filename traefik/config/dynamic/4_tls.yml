@@ -1,0 +1,4 @@
+tls:
+  certificates:
+    - certFile: /CA/knh.cloud+4.pem
+      keyFile: /CA/knh.cloud+4-key.pem

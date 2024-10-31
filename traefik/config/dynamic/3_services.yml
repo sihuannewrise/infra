@@ -1,19 +1,9 @@
 http:
   services:
-    coder:
-      loadBalancer:
-        servers:
-          - url: http://coder:7080
-
     fief:
       loadBalancer:
         servers:
           - url: http://fief:8000
-
-    nas:
-      loadBalancer:
-        servers:
-          - url: http://192.168.2.72:8760
 
     nocodb:
       loadBalancer:
@@ -23,7 +13,7 @@ http:
     pihole:
       loadBalancer:
         servers:
-          - url: http://pihole:3001
+          - url: http://192.168.2.72:3001
 
     pgadmin:
       loadBalancer:

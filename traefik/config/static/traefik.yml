@@ -1,4 +1,4 @@
-## scp -O -P 2222 traefik/config/static/traefik.yml sihuan@192.168.2.72:/share/dockume/infra/traefik/static
+## scp traefik/config/static/traefik.yml root@192.168.2.91:/share/infra/traefik/static
 ## http://localhost:8080/api/rawdata
 
 entryPoints:
@@ -10,40 +10,55 @@ entryPoints:
           to: websecure
   websecure:
     address: :443
-    http:
-      tls:
-        certResolver: letsencrypt
-        domains:
-          - main: knh.cloud
-            sans:
-              - fief.knh.cloud
-              - nas.knh.cloud
-              - nocodb.knh.cloud
-              - pgadmin.knh.cloud
-              - pihole.knh.cloud
-              - portainer.knh.cloud
-              - traefik.knh.cloud
+    # http:
+    #   tls:
+    #     certResolver: mkcert
+        # certResolver: letsencrypt
+        # domains:
+        #   - main: knh.cloud
+        #     sans:
+        #       - fief.knh.cloud
+        #       - nas.knh.cloud
+        #       - nocodb.knh.cloud
+        #       - pgadmin.knh.cloud
+        #       - pihole.knh.cloud
+        #       - portainer.knh.cloud
+        #       - traefik.knh.cloud
 
 api:
   dashboard: true
   insecure: true
 
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
 providers:
   docker:
-    network: traefik
+    network: traefik-public
     exposedByDefault: false
   file:
     directory: /config/dynamic
     watch: true
 
-certificatesResolvers:
-  letsencrypt:
-    acme:
-      email: sihuannewrise@gmail.com
-      storage: /letsencrypt/acme.json
-      caServer: https://acme-staging-v02.api.letsencrypt.org/directory
-      httpChallenge:
-        entryPoint: web
+# certificatesResolvers:
+#   mkcert:
+#     acme:
+#       email: sihuannewrise@gmail.com
+#       storage: /CA/mkcert-acme.json
+#       caServer: https://__knh_cloud__/CA
+#       tlsChallenge: true
+#       httpChallenge:
+#         entryPoint: web
+
+#   letsencrypt:
+#     acme:
+#       email: sihuannewrise@gmail.com
+#       storage: /letsencrypt/acme.json
+#       caServer: https://acme-staging-v02.api.letsencrypt.org/directory # For testing, comment out for production
+#       tlsChallenge: {}
+      # httpChallenge:
+      #   entryPoint: web
 
 accessLog:
   true
@@ -55,3 +70,4 @@ accessLog:
 
 log:
   level: ERROR
+  # level: DEBUG" # set to INFO for production

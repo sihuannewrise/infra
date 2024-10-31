@@ -3,3 +3,7 @@ http:
     auth:
       basicAuth:
         usersFile: /config/usersfile
+
+    # add-prefix-admin:
+    #   addPrefix:
+    #     prefix: /admin

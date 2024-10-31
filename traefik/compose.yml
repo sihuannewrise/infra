@@ -1,15 +1,13 @@
----
 ## path to place the file
 ## scp -O -P 2222 traefik/compose.yml sihuan@192.168.2.72:/share/dockume/infra/traefik
 ## docker compose up -d
 ## docker compose down
-
+---
 services:
   traefik:
-    image: traefik:v2.11.2
-    container_name: traefik
+    image: traefik:v3.2
     hostname: traefik
-    restart: unless-stopped
+    restart: always
     security_opt:
       - no-new-privileges:true
     ports:
@@ -18,12 +16,13 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /share/dockume/infra/traefik:/config
-      - /share/dockume/infra/traefik/static:/etc/traefik
-      - /share/dockume/infra/letsencrypt:/letsencrypt
+      - /share/infra/traefik:/config
+      - /share/infra/traefik/static:/etc/traefik
+      # - /share/infra/letsencrypt:/letsencrypt
+      - /share/infra/CA:/CA
     networks:
-      - traefik
+      - traefik-public
 
 networks:
-  traefik:
+  traefik-public:
     external: true
