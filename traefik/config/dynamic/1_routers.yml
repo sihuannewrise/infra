@@ -16,16 +16,17 @@ http:
       service: fief
 
     to-nocodb:
+      service: nocodb
+      rule: Host(`nocodb.knh.cloud`)
       entryPoints:
         - websecure
-      rule: Host(`nocodb.knh.cloud`)
-      service: nocodb
+      tls: {}
 
     to-pihole:
       service: pihole
+      rule: Host(`pihole.knh.cloud`) && PathPrefix(`/admin`)
       entryPoints:
         - websecure
-      rule: Host(`pihole.knh.cloud`) && PathPrefix(`/admin`)
       tls: {}
 
     to-pgadmin:
@@ -38,16 +39,16 @@ http:
 
     to-portainer:
       service: portainer
+      rule: Host(`portainer.knh.cloud`)
       entryPoints:
         - websecure
-      rule: Host(`portainer.knh.cloud`)
       tls: {}
 
     to-traefik:
       service: traefik
+      rule: Host(`traefik.knh.cloud`)
       entryPoints:
         - websecure
       middlewares:
         - auth
-      rule: Host(`traefik.knh.cloud`)
       tls: {}

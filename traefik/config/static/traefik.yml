@@ -10,20 +10,6 @@ entryPoints:
           to: websecure
   websecure:
     address: :443
-    # http:
-    #   tls:
-    #     certResolver: mkcert
-        # certResolver: letsencrypt
-        # domains:
-        #   - main: knh.cloud
-        #     sans:
-        #       - fief.knh.cloud
-        #       - nas.knh.cloud
-        #       - nocodb.knh.cloud
-        #       - pgadmin.knh.cloud
-        #       - pihole.knh.cloud
-        #       - portainer.knh.cloud
-        #       - traefik.knh.cloud
 
 api:
   dashboard: true
@@ -40,25 +26,6 @@ providers:
   file:
     directory: /config/dynamic
     watch: true
-
-# certificatesResolvers:
-#   mkcert:
-#     acme:
-#       email: sihuannewrise@gmail.com
-#       storage: /CA/mkcert-acme.json
-#       caServer: https://__knh_cloud__/CA
-#       tlsChallenge: true
-#       httpChallenge:
-#         entryPoint: web
-
-#   letsencrypt:
-#     acme:
-#       email: sihuannewrise@gmail.com
-#       storage: /letsencrypt/acme.json
-#       caServer: https://acme-staging-v02.api.letsencrypt.org/directory # For testing, comment out for production
-#       tlsChallenge: {}
-      # httpChallenge:
-      #   entryPoint: web
 
 accessLog:
   true

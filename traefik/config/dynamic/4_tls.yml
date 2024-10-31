@@ -1,4 +1,12 @@
 tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /CA/knh.cloud+4.pem
+        keyFile: /CA/knh.cloud+4-key.pem
+
   certificates:
     - certFile: /CA/knh.cloud+4.pem
       keyFile: /CA/knh.cloud+4-key.pem
+      stores:
+        - default
