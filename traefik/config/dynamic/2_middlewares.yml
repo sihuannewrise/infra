@@ -2,8 +2,4 @@ http:
   middlewares:
     auth:
       basicAuth:
-        usersFile: /config/usersfile
-
-    # add-prefix-admin:
-    #   addPrefix:
-    #     prefix: /admin
+        usersFile: /etc/traefik/usersfile

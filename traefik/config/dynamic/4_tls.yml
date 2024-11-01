@@ -1,12 +1,13 @@
+---
 tls:
   stores:
-    default:
-      defaultCertificate:
-        certFile: /CA/knh.cloud+4.pem
-        keyFile: /CA/knh.cloud+4-key.pem
+    default: {}
+      # defaultCertificate:
+      #   certFile: /etc/traefik/CA/cert.pem
+      #   keyFile: /etc/traefik/CA/key.pem
 
   certificates:
-    - certFile: /CA/knh.cloud+4.pem
-      keyFile: /CA/knh.cloud+4-key.pem
+    - certFile: /etc/traefik/CA/cert.pem
+      keyFile: /etc/traefik/CA/key.pem
       stores:
         - default

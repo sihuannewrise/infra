@@ -1,4 +1,4 @@
-## scp traefik/config/static/traefik.yml root@192.168.2.91:/share/infra/traefik/static
+## scp traefik/config/static/traefik.yml root@192.168.2.91:/share/infra/traefik
 ## http://localhost:8080/api/rawdata
 
 entryPoints:
@@ -24,13 +24,12 @@ providers:
     network: traefik-public
     exposedByDefault: false
   file:
-    directory: /config/dynamic
+    directory: /etc/traefik/dynamic
     watch: true
 
-accessLog:
-  true
-  # filePath: /config/traefik-log.log
-  # bufferingSize: 100 # Configuring a buffer of 100 lines
+accessLog: true
+  # filePath: /etc/traefik/traefik.log
+  # bufferingSize: 100   # Configuring a buffer of 100 lines
   # filters:
   #   statusCodes:
   #     - 400-499

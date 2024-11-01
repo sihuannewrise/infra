@@ -16,13 +16,12 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /share/infra/traefik:/config
-      - /share/infra/traefik/static:/etc/traefik
-      # - /share/infra/letsencrypt:/letsencrypt
-      - /share/infra/CA:/CA
+      - /share/infra/traefik:/etc/traefik
     networks:
       - traefik-public
 
 networks:
   traefik-public:
     external: true
+
+# mkcert -key-file key.pem -cert-file cert.pem knh.cloud "*.knh.cloud" localhost 127.0.0.1 ::1
